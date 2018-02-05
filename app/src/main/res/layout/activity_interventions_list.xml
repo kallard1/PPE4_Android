@@ -20,11 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ListView
-        android:id="@+id/listIntervention"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="5dp"
-        android:footerDividersEnabled="false">
-    </ListView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
 </android.support.design.widget.CoordinatorLayout>
