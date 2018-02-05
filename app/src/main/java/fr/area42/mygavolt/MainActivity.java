@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import fr.area42.mygavolt.Interventions.List;
+import fr.area42.mygavolt.Interventions.ListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_interventions:
-                                Intent intent = new Intent(MainActivity.this, List.class);
+                                Intent intent = new Intent(MainActivity.this, ListActivity.class);
                                 startActivity(intent);
                                 break;
 
