@@ -1,15 +1,20 @@
 package fr.area42.mygavolt.Utils.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import fr.area42.mygavolt.Interventions.ListActivity;
+import fr.area42.mygavolt.Interventions.ShowActivity;
 import fr.area42.mygavolt.R;
 import fr.area42.mygavolt.Utils.Models.Intervention;
 
@@ -19,10 +24,11 @@ import fr.area42.mygavolt.Utils.Models.Intervention;
 
 public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapter.ViewHolder> {
 
-    private Context context;
+    private ListActivity context;
     private List<Intervention> interventionList;
 
-    public InterventionAdapter(Context context, List interventionList) {
+
+    public InterventionAdapter(ListActivity context, List interventionList) {
         this.context = context;
         this.interventionList = interventionList;
     }
@@ -39,8 +45,19 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
         holder.itemView.setTag(interventionList.get(position));
 
         Intervention intervention = interventionList.get(position);
+        Date date = intervention.getDate();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy à HH:mm", Locale.FRANCE);
+        String customerContact;
 
-        holder.id.setText(intervention.getId());
+        if (intervention.getContactFirstName() != null && intervention.getContactLastName() != null) {
+            customerContact = intervention.getContactFirstName() + " " + intervention.getContactLastName();
+        } else {
+            customerContact = intervention.getCustomerFirstName() + " " + intervention.getCustomerLastName();
+        }
+
+        holder.id.setText(String.format("#%s", intervention.getId()));
+        holder.date.setText(String.format("Le %s", format.format(date)));
+        holder.customerName.setText((intervention.getCustomerBusinessName().equalsIgnoreCase("") ? customerContact : intervention.getCustomerBusinessName() + " - " + customerContact));
     }
 
     @Override
@@ -66,7 +83,10 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
                 public void onClick(View view) {
                     Intervention intervention = (Intervention) view.getTag();
 
-                    Toast.makeText(view.getContext(), intervention.getId() + " " + intervention.getDate(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), ShowActivity.class);
+                    intent.putExtra("id", intervention.getId());
+
+                    context.startActivity(intent);
                 }
             });
         }
