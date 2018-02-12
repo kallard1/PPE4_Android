@@ -1,6 +1,5 @@
-package fr.area42.mygavolt.Utils.Adapter;
+package fr.area42.mygavolt.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import java.util.Locale;
 import fr.area42.mygavolt.Interventions.ListActivity;
 import fr.area42.mygavolt.Interventions.ShowActivity;
 import fr.area42.mygavolt.R;
-import fr.area42.mygavolt.Utils.Models.Intervention;
+import fr.area42.mygavolt.Models.Intervention;
 
 /**
  * Created by allardk on 02/02/2018.
