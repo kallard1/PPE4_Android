@@ -1,4 +1,4 @@
-package fr.area42.mygavolt.Utils.Models;
+package fr.area42.mygavolt.Models;
 
 import java.util.Date;
 
