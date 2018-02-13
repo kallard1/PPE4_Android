@@ -67,6 +67,8 @@ public class InterventionHelper {
             }
         });
 
-        requestQueue.add(jsonArrayRequest);w
+        requestQueue.add(jsonArrayRequest);
+
+        return interventionList;
     }
 }
