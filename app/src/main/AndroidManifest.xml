@@ -28,12 +28,17 @@
         </activity>
 
         <activity android:name=".Login" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".Interventions.ListActivity"
+        <activity
+            android:name=".Interventions.ListActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
             />
+        <activity android:name=".Interventions.ShowActivity" />
     </application>
 
 </manifest>
