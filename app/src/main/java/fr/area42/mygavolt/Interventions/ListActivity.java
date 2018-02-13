@@ -1,18 +1,22 @@
 package fr.area42.mygavolt.Interventions;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
-import fr.area42.mygavolt.API.Helper.InterventionHelper;
-import fr.area42.mygavolt.Adapter.InterventionAdapter;
+import java.io.IOException;
+
+import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by allardk on 30/01/2018.
@@ -20,10 +24,13 @@ import fr.area42.mygavolt.R;
 
 public class ListActivity extends AppCompatActivity {
 
-    RecyclerView.Adapter recyclerViewAdapter;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    RequestQueue requestQueue;
+//    RecyclerView.Adapter recyclerViewAdapter;
+//    RecyclerView recyclerView;
+//    RecyclerView.LayoutManager layoutManager;
+
+    TextView textView;
+
+    OkHttpClient httpClient = new OkHttpClient();
 
 
     @Override
@@ -37,18 +44,27 @@ public class ListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        requestQueue = Volley.newRequestQueue(this);
+        textView = findViewById(R.id.data);
+//        recyclerView = findViewById(R.id.recyclerViewContainer);
+//        recyclerView.setHasFixedSize(true);
+//
+//        layoutManager = new LinearLayoutManager(this);
+//
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        recyclerViewAdapter = new InterventionAdapter(ListActivity.this, InterventionHelper.sendRequest(requestQueue));
+//
+//        recyclerView.setAdapter(recyclerViewAdapter);
+    }
 
-        recyclerView = findViewById(R.id.recyclerViewContainer);
-        recyclerView.setHasFixedSize(true);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        layoutManager = new LinearLayoutManager(this);
+        String url = "http://api.area42.fr/interventions";
 
-        recyclerView.setLayoutManager(layoutManager);
-
-        recyclerViewAdapter = new InterventionAdapter(ListActivity.this, InterventionHelper.sendRequest(requestQueue));
-
-        recyclerView.setAdapter(recyclerViewAdapter);
+        InterventionAsyncTask asyncTask = new InterventionAsyncTask();
+        asyncTask.execute(url);
     }
 
     @Override
@@ -63,5 +79,48 @@ public class ListActivity extends AppCompatActivity {
         onBackPressed();
         finish();
         return true;
+    }
+
+    /**
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    String run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = httpClient.newCall(request).execute();
+
+        return response.body().string();
+    }
+
+    class InterventionAsyncTask extends AsyncTask<String, Void, Intervention> {
+
+        @Override
+        protected Intervention doInBackground(String... strings) {
+            try {
+                String jsonBody= run(strings[0]);
+
+                Gson gson = new Gson();
+
+                Intervention intervention = gson.fromJson(jsonBody, Intervention.class);
+
+                return intervention;
+            } catch (IOException e) {
+                Log.e("ERROR:", e.getStackTrace().toString());
+
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Intervention intervention) {
+            if (intervention != null) {
+
+                System.out.println(intervention);
+            }
+        }
     }
 }
