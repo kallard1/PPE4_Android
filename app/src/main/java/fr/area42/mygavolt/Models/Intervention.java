@@ -14,11 +14,11 @@ public class Intervention {
     public Date createdAt;
     public Date updatedAt;
 
-    public List<AddressCustomer> addressCustomer;
-    public List<Employee> employee;
-    public List<Motive> motive;
+    public addressCustomer addressCustomer;
+    public Employee employee;
+    public Motive motive;
 
-    public static class AddressCustomer {
+    public static class addressCustomer {
         public int id;
         public String streetNumber;
         public String streetName;

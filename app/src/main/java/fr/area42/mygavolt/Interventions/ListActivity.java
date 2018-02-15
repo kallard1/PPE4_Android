@@ -3,15 +3,21 @@ package fr.area42.mygavolt.Interventions;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
+import fr.area42.mygavolt.Adapter.InterventionAdapter;
 import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
 import okhttp3.OkHttpClient;
@@ -24,9 +30,9 @@ import okhttp3.Response;
 
 public class ListActivity extends AppCompatActivity {
 
-//    RecyclerView.Adapter recyclerViewAdapter;
-//    RecyclerView recyclerView;
-//    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.Adapter recyclerViewAdapter;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     TextView textView;
 
@@ -45,26 +51,20 @@ public class ListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         textView = findViewById(R.id.data);
-//        recyclerView = findViewById(R.id.recyclerViewContainer);
-//        recyclerView.setHasFixedSize(true);
-//
-//        layoutManager = new LinearLayoutManager(this);
-//
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        recyclerViewAdapter = new InterventionAdapter(ListActivity.this, InterventionHelper.sendRequest(requestQueue));
-//
-//        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView = findViewById(R.id.recyclerViewContainer);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        String url = "http://api.area42.fr/interventions";
-
         InterventionAsyncTask asyncTask = new InterventionAsyncTask();
-        asyncTask.execute(url);
+        asyncTask.execute("http://api.area42.fr/interventions");
     }
 
     @Override
@@ -96,30 +96,34 @@ public class ListActivity extends AppCompatActivity {
         return response.body().string();
     }
 
-    class InterventionAsyncTask extends AsyncTask<String, Void, Intervention> {
+    class InterventionAsyncTask extends AsyncTask<String, Void, List<Intervention>> {
 
         @Override
-        protected Intervention doInBackground(String... strings) {
+        protected List<Intervention> doInBackground(String... strings) {
+            List<Intervention> interventions = null;
             try {
-                String jsonBody= run(strings[0]);
-
+                String jsonString = run(strings[0]);
                 Gson gson = new Gson();
 
-                Intervention intervention = gson.fromJson(jsonBody, Intervention.class);
+                Type collectionType = new TypeToken<List<Intervention>>() {
+                }.getType();
+                interventions = gson.fromJson(jsonString, collectionType);
 
-                return intervention;
             } catch (IOException e) {
                 Log.e("ERROR:", e.getStackTrace().toString());
 
                 return null;
             }
+
+            return interventions;
         }
 
         @Override
-        protected void onPostExecute(Intervention intervention) {
-            if (intervention != null) {
+        protected void onPostExecute(List<Intervention> interventions) {
+            if (interventions != null) {
+                recyclerViewAdapter = new InterventionAdapter(ListActivity.this, interventions);
 
-                System.out.println(intervention);
+                recyclerView.setAdapter(recyclerViewAdapter);
             }
         }
     }
