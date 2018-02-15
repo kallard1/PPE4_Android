@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -99,6 +100,12 @@ public class ListActivity extends AppCompatActivity {
     class InterventionAsyncTask extends AsyncTask<String, Void, List<Intervention>> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(getApplicationContext(), "Chargement des interventions...", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
         protected List<Intervention> doInBackground(String... strings) {
             List<Intervention> interventions = null;
             try {
@@ -121,6 +128,7 @@ public class ListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Intervention> interventions) {
             if (interventions != null) {
+                Toast.makeText(getApplicationContext(), "Chargement des interventions terminé", Toast.LENGTH_LONG).show();
                 recyclerViewAdapter = new InterventionAdapter(ListActivity.this, interventions);
 
                 recyclerView.setAdapter(recyclerViewAdapter);
