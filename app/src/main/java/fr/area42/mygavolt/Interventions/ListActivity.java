@@ -21,9 +21,7 @@ import java.util.List;
 import fr.area42.mygavolt.Adapter.InterventionAdapter;
 import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import fr.area42.mygavolt.Singletons.Http;
 
 /**
  * Created by allardk on 30/01/2018.
@@ -36,9 +34,6 @@ public class ListActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     TextView textView;
-
-    OkHttpClient httpClient = new OkHttpClient();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,34 +77,21 @@ public class ListActivity extends AppCompatActivity {
         return true;
     }
 
-    /**
-     * @param url
-     * @return
-     * @throws IOException
-     */
-    String run(String url) throws IOException {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        Response response = httpClient.newCall(request).execute();
-
-        return response.body().string();
-    }
 
     class InterventionAsyncTask extends AsyncTask<String, Void, List<Intervention>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(getApplicationContext(), "Chargement des interventions...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chargement des interventions...", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected List<Intervention> doInBackground(String... strings) {
-            List<Intervention> interventions = null;
+            List<Intervention> interventions;
+
             try {
-                String jsonString = run(strings[0]);
+                String jsonString = Http.run(strings[0]);
                 Gson gson = new Gson();
 
                 Type collectionType = new TypeToken<List<Intervention>>() {
@@ -128,7 +110,7 @@ public class ListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Intervention> interventions) {
             if (interventions != null) {
-                Toast.makeText(getApplicationContext(), "Chargement des interventions terminé", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Chargement des interventions terminé", Toast.LENGTH_SHORT).show();
                 recyclerViewAdapter = new InterventionAdapter(ListActivity.this, interventions);
 
                 recyclerView.setAdapter(recyclerViewAdapter);
