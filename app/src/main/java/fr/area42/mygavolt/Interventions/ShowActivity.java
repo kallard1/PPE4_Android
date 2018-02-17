@@ -23,10 +23,6 @@ public class ShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intervention);
 
         Toolbar toolbarIntervention = findViewById(R.id.toolbarIntervention);
-        setSupportActionBar(toolbarIntervention);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Bundle extras = getIntent().getExtras();
 
@@ -34,6 +30,10 @@ public class ShowActivity extends AppCompatActivity {
             id = extras.getInt("id");
         }
 
+        setTitle("Intervention #" + id);
+        setSupportActionBar(toolbarIntervention);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override

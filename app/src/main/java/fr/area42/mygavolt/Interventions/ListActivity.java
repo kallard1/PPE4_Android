@@ -41,6 +41,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_interventions_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setTitle("Mes interventions");
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
