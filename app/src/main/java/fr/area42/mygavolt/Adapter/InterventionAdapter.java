@@ -1,5 +1,6 @@
 package fr.area42.mygavolt.Adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 
 import fr.area42.mygavolt.Interventions.ListActivity;
+import fr.area42.mygavolt.Interventions.ShowActivity;
 import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
 
@@ -48,7 +50,7 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
         String customerContact;
 
         if (intervention.addressCustomer.contact.firstname != null && intervention.addressCustomer.contact.lastname != null) {
-            customerContact = intervention.addressCustomer.contact.firstname + " " + intervention.addressCustomer.contact.firstname;
+            customerContact = intervention.addressCustomer.contact.firstname + " " + intervention.addressCustomer.contact.lastname;
         } else {
             customerContact = intervention.addressCustomer.customer.firstname + " " + intervention.addressCustomer.customer.lastname;
         }
@@ -79,12 +81,12 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intervention intervention = (Intervention) view.getTag();
-//
-//                    Intent intent = new Intent(view.getContext(), ShowActivity.class);
-////                    intent.putExtra("id", intervention.getId());
-//
-//                    context.startActivity(intent);
+                    Intervention intervention = (Intervention) view.getTag();
+
+                    Intent intent = new Intent(view.getContext(), ShowActivity.class);
+                    intent.putExtra("id", intervention.id);
+
+                    context.startActivity(intent);
                 }
             });
         }
