@@ -63,7 +63,7 @@ public class ShowActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Toast.makeText(getApplicationContext(), "Chargement de l'intervention #" + id + "...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Chargement de l'intervention #" + id + "...", Toast.LENGTH_SHORT).show();
 
         }
 
