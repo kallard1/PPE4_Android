@@ -1,7 +1,9 @@
 package fr.area42.mygavolt;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -10,6 +12,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -38,6 +43,8 @@ public class SplashScreen extends Activity {
         assert packageInfo != null;
         versionName = packageInfo.versionName;
 
+        Log.d("IMEI", getIMEI());
+
         TextView textViewVersionInfo = findViewById(R.id.textview_version_info);
         textViewVersionInfo.setText(String.format("Version: %s", versionName));
 
@@ -63,5 +70,23 @@ public class SplashScreen extends Activity {
                     })
                     .show();
         }
+    }
+
+    private String getIMEI() {
+        TelephonyManager telephonyManager;
+
+        telephonyManager = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return "";
+        }
+        return telephonyManager.getDeviceId();
     }
 }
