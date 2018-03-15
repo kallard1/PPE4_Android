@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "990183012953",
+    "firebase_url": "https://ppe4-cd911.firebaseio.com",
+    "project_id": "ppe4-cd911",
+    "storage_bucket": "ppe4-cd911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990183012953:android:e13da555ff4d2368",
+        "android_client_info": {
+          "package_name": "fr.area42.mygavolt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990183012953-dbg6imfnceo97v6ei5to9mrlra0v1g69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.area42.mygavolt",
+            "certificate_hash": "4eded11330105a3f427a0e000114323bca8b88e8"
+          }
+        },
+        {
+          "client_id": "990183012953-53go9t7uk2qj9obhb1l48nr7h43ivsfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxdsWDZZEH1u4F1ilv0TqDLn2F4Qwd_JE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990183012953-53go9t7uk2qj9obhb1l48nr7h43ivsfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

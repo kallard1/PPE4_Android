@@ -2,6 +2,7 @@ package fr.area42.mygavolt.Adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,6 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
         holder.itemView.setTag(interventionList.get(position));
 
         Intervention intervention = interventionList.get(position);
-
-        Date date = intervention.date;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy à HH:mm", Locale.FRANCE);
         String customerContact;
 
         if (intervention.addressCustomer.contact.firstname != null && intervention.addressCustomer.contact.lastname != null) {
@@ -55,7 +53,7 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
             customerContact = intervention.addressCustomer.customer.firstname + " " + intervention.addressCustomer.customer.lastname;
         }
         holder.id.setText(String.format("#%s", intervention.id));
-        holder.date.setText(String.format("Le %s", format.format(date)));
+        holder.date.setText(String.format("Le %s", formatDate(intervention.date)));
         holder.customerName.setText((intervention.addressCustomer.customer.businessName.equalsIgnoreCase("") ?
                 customerContact : intervention.addressCustomer.customer.businessName + " - " + customerContact));
     }
@@ -84,11 +82,23 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
                     Intervention intervention = (Intervention) view.getTag();
 
                     Intent intent = new Intent(view.getContext(), ShowActivity.class);
-                    intent.putExtra("id", intervention.id);
+
+                    putExtra(intent, intervention);
 
                     context.startActivity(intent);
                 }
             });
         }
+    }
+
+    private void putExtra(Intent intent, Intervention intervention) {
+        intent.putExtra("id", intervention.id);
+        intent.putExtra("date", formatDate(intervention.date));
+    }
+
+    private String formatDate(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy à HH:mm", Locale.FRANCE);
+
+        return format.format(date);
     }
 }
