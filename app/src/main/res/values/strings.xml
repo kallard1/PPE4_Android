@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Mygavolt</string>
     <string name="home">Home</string>
-    <string name="intervention">Intervention</string>
-    <string name="reports">Reports</string>
-    <string name="Username">Username</string>
+    <string name="intervention">Interventions</string>
+    <string name="reports">Rapports</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
 </resources>
