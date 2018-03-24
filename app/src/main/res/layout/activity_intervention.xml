@@ -7,6 +7,112 @@
     android:layout_height="match_parent"
     tools:context="fr.area42.mygavolt.Interventions.ListActivity">
 
+
+    <RelativeLayout
+        android:id="@+id/singleRow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/interventionDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/interventionCustomer"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="24dp"
+            android:text="Date/Heure"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/interventionCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/interventionDate"
+            android:layout_marginTop="94dp"
+            android:text="Client"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/interventionMotive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/interventionDate"
+            android:layout_marginTop="38dp"
+            android:text="Motif"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/mobile"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignBottom="@+id/dialMobile"
+            android:layout_alignStart="@+id/interventionMotive"
+            android:contentDescription="Phone"
+            android:src="@drawable/ic_phone_black" />
+
+        <TextView
+            android:id="@+id/dial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/dialMobile"
+            android:layout_below="@+id/dialMobile"
+            android:layout_marginTop="14dp"
+            android:autoLink="phone"
+            android:linksClickable="true"
+            android:text="@string/call"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/dialMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/mobile"
+            android:autoLink="phone"
+            android:linksClickable="true"
+            android:text="@string/call"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/gps"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_below="@+id/dial"
+            android:layout_marginTop="54dp"
+            android:layout_toStartOf="@+id/dialMobile"
+            android:contentDescription="GPS"
+            android:src="@drawable/ic_location_on_black" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/gps"
+            android:layout_alignStart="@+id/dial"
+            android:autoLink="map"
+            android:clickable="true"
+            android:text="@string/address"
+            android:textSize="20sp"
+            android:focusable="true"
+            tools:ignore="HardcodedText"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_create_white"
+        android:layout_margin="16dp" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,22 +126,5 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <TextView
-            android:id="@+id/interventionDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:textSize="30sp" />
-    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

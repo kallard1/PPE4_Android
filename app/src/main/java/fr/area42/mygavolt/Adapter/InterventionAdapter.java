@@ -92,8 +92,25 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
     }
 
     private void putExtra(Intent intent, Intervention intervention) {
+
+        String customerContact;
+
+        if (intervention.addressCustomer.contact.firstname != null && intervention.addressCustomer.contact.lastname != null) {
+            customerContact = intervention.addressCustomer.contact.firstname + " " + intervention.addressCustomer.contact.lastname;
+        } else {
+            customerContact = intervention.addressCustomer.customer.firstname + " " + intervention.addressCustomer.customer.lastname;
+        }
+
         intent.putExtra("id", intervention.id);
-        intent.putExtra("date", formatDate(intervention.date));
+        intent.putExtra("date", "Le " + formatDate(intervention.date));
+        intent.putExtra("customerName", (intervention.addressCustomer.customer.businessName.equalsIgnoreCase("") ?
+                customerContact : intervention.addressCustomer.customer.businessName + " - " + customerContact));
+        intent.putExtra("motiveIntervention", intervention.motive.label);
+        intent.putExtra("customerPhone", intervention.addressCustomer.contact.phone);
+        intent.putExtra("customerMobile", intervention.addressCustomer.contact.mobile);
+        intent.putExtra("customerAddress", intervention.addressCustomer.streetNumber + " " +
+        intervention.addressCustomer.streetName + " " + intervention.addressCustomer.zipCode + " " + intervention.addressCustomer.city);
+
     }
 
     private String formatDate(Date date) {
@@ -101,4 +118,5 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
 
         return format.format(date);
     }
+
 }

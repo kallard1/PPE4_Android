@@ -1,16 +1,18 @@
 package fr.area42.mygavolt.Interventions;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Date;
-
+import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
+import fr.area42.mygavolt.ReportActivity;
 
 /**
  * Created by allardk on 06/02/2018.
@@ -28,19 +30,43 @@ public class ShowActivity extends AppCompatActivity {
 
         Toolbar toolbarIntervention = findViewById(R.id.toolbarIntervention);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+
         Bundle extras = getIntent().getExtras();
 
         TextView dateView = findViewById(R.id.interventionDate);
+        TextView customerName = findViewById(R.id.interventionCustomer);
+        TextView motiveIntervention = findViewById(R.id.interventionMotive);
+        TextView dial = findViewById(R.id.dial);
+        TextView mobile = findViewById(R.id.dialMobile);
+        TextView address = findViewById(R.id.address);
 
         if (extras != null) {
             id = extras.getInt("id");
             dateView.setText(extras.getString("date"));
+            customerName.setText(extras.getString("customerName"));
+            motiveIntervention.setText(extras.getString("motiveIntervention"));
+            dial.setText(extras.getString("customerPhone"));
+            mobile.setText(extras.getString("customerMobile"));
+            address.setText(extras.getString("customerAddress"));
+
         }
 
         setTitle("Intervention #" + id);
         setSupportActionBar(toolbarIntervention);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ReportActivity.class);
+
+                intent.putExtra("id", id);
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

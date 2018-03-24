@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -90,11 +89,15 @@ public class ListActivity extends AppCompatActivity {
 
             try {
                 String jsonString = Http.run(strings[0]);
+
+                System.out.println(jsonString);
+
                 Gson gson = new Gson();
 
-                Type collectionType = new TypeToken<List<Intervention>>() {
-                }.getType();
+                Type collectionType = new TypeToken<List<Intervention>>() {}.getType();
                 interventions = gson.fromJson(jsonString, collectionType);
+
+                System.out.println(interventions);
 
             } catch (IOException e) {
                 Log.e("ERROR:", e.getStackTrace().toString());
