@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -11,6 +12,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import fr.area42.mygavolt.Singletons.SecurePreferences;
 
 /**
  * Created by allardk on 28/01/2018.
@@ -46,7 +50,18 @@ public class SplashScreenActivity extends Activity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+
+                    SharedPreferences sharedPreferences = new SecurePreferences(getApplicationContext());
+
+                    String userID = sharedPreferences.getString("userID", null);
+                    Intent intent = null;
+                    if (userID == null) {
+                        intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                    } else {
+                        intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "Bonjour " + sharedPreferences.getString("firstname", "") + " " + sharedPreferences.getString("lastname", ""), Toast.LENGTH_SHORT).show();
+
+                    }
                     startActivity(intent);
                     finish();
                 }

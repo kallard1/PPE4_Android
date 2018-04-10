@@ -63,7 +63,6 @@ public class ListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -89,8 +88,6 @@ public class ListActivity extends AppCompatActivity {
 
             try {
                 String jsonString = Http.run(strings[0]);
-
-                System.out.println(jsonString);
 
                 Gson gson = new Gson();
 

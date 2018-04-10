@@ -7,23 +7,14 @@
     tools:context="fr.area42.mygavolt.MainActivity">
 
     <EditText
-        android:id="@+id/edit_text_username"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/edit_text_password"
-        android:layout_alignStart="@+id/edit_text_password"
-        android:hint="@string/username"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/edit_text_password"
+        android:id="@+id/userId"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_login"
         android:layout_alignStart="@+id/button_login"
         android:layout_marginBottom="48dp"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:hint="@string/userid"
+        android:inputType="textNoSuggestions" />
 
     <Button
         android:id="@+id/button_login"
@@ -32,5 +23,4 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/login" />
-
 </RelativeLayout>
