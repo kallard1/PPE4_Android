@@ -41,9 +41,6 @@ public class ListActivity extends AppCompatActivity {
         setTitle("Mes interventions");
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         recyclerView = findViewById(R.id.recyclerViewContainer);
         recyclerView.setHasFixedSize(true);
 
@@ -62,7 +59,8 @@ public class ListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 

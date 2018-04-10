@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import fr.area42.mygavolt.Interventions.ListActivity;
 import fr.area42.mygavolt.Models.Employee;
 import fr.area42.mygavolt.Singletons.Http;
 import fr.area42.mygavolt.Singletons.SecurePreferences;
@@ -45,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (!userId.getText().toString().isEmpty()) {
                     LoginAsyncTask loginAsyncTask = new LoginAsyncTask();
                     loginAsyncTask.execute("http://api.area42.fr/employees?userId=" + userId.getText().toString());
-
-
                 } else {
                     Toast.makeText(getApplicationContext(), "Veuillez saisir un UserID", Toast.LENGTH_SHORT).show();
                 }
@@ -101,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (commit) {
                     Toast.makeText(getApplicationContext(), "Bonjour " + sharedPreferences.getString("firstname", null) + " " + sharedPreferences.getString("lastname", null), Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
