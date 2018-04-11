@@ -1,5 +1,6 @@
 package fr.area42.mygavolt.Interventions;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -18,9 +20,11 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import fr.area42.mygavolt.Adapter.InterventionAdapter;
+import fr.area42.mygavolt.LoginActivity;
 import fr.area42.mygavolt.Models.Intervention;
 import fr.area42.mygavolt.R;
 import fr.area42.mygavolt.Singletons.Http;
+import fr.area42.mygavolt.Singletons.SecurePreferences;
 
 /**
  * Created by allardk on 30/01/2018.
@@ -65,12 +69,24 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        new SecurePreferences(getApplicationContext()).edit().clear().commit();
+
+        Intent intent = new Intent(ListActivity.this, LoginActivity.class);
+        Toast.makeText(getApplicationContext(), "Déconnexion effectuée", Toast.LENGTH_SHORT).show();
+
+        startActivity(intent);
+        finish();
+
+        return false;
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         finish();
         return true;
     }
-
 
     class InterventionAsyncTask extends AsyncTask<String, Void, List<Intervention>> {
 
@@ -89,7 +105,8 @@ public class ListActivity extends AppCompatActivity {
 
                 Gson gson = new Gson();
 
-                Type collectionType = new TypeToken<List<Intervention>>() {}.getType();
+                Type collectionType = new TypeToken<List<Intervention>>() {
+                }.getType();
                 interventions = gson.fromJson(jsonString, collectionType);
 
                 System.out.println(interventions);
