@@ -109,8 +109,6 @@ public class ListActivity extends AppCompatActivity {
                 }.getType();
                 interventions = gson.fromJson(jsonString, collectionType);
 
-                System.out.println(interventions);
-
             } catch (IOException e) {
                 Log.e("ERROR:", e.getStackTrace().toString());
 

@@ -2,7 +2,6 @@ package fr.area42.mygavolt.Adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,8 +108,8 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
         intent.putExtra("customerPhone", intervention.addressCustomer.contact.phone);
         intent.putExtra("customerMobile", intervention.addressCustomer.contact.mobile);
         intent.putExtra("customerAddress", intervention.addressCustomer.streetNumber + " " +
-        intervention.addressCustomer.streetName + " " + intervention.addressCustomer.zipCode + " " + intervention.addressCustomer.city);
-
+                intervention.addressCustomer.streetName + " " + intervention.addressCustomer.zipCode + " " + intervention.addressCustomer.city);
+        intent.putExtra("report", intervention.report);
     }
 
     private String formatDate(Date date) {

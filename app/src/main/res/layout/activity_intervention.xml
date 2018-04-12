@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context="fr.area42.mygavolt.Interventions.ListActivity">
 
-
     <RelativeLayout
         android:id="@+id/singleRow"
         android:layout_width="match_parent"

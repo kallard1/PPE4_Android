@@ -32,7 +32,7 @@ public class ShowActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
 
         TextView dateView = findViewById(R.id.interventionDate);
         TextView customerName = findViewById(R.id.interventionCustomer);
@@ -49,7 +49,6 @@ public class ShowActivity extends AppCompatActivity {
             dial.setText(extras.getString("customerPhone"));
             mobile.setText(extras.getString("customerMobile"));
             address.setText(extras.getString("customerAddress"));
-
         }
 
         setTitle("Intervention #" + id);
@@ -63,6 +62,9 @@ public class ShowActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), ReportActivity.class);
 
                 intent.putExtra("id", id);
+                if (extras != null) {
+                    intent.putExtra("report", extras.getString("report"));
+                }
 
                 startActivity(intent);
             }
