@@ -96,12 +96,10 @@
             android:layout_alignBottom="@+id/gps"
             android:layout_alignStart="@+id/dial"
             android:autoLink="map"
-            android:clickable="true"
             android:text="@string/address"
             android:textSize="20sp"
             android:focusable="true"
             tools:ignore="HardcodedText"/>
-
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

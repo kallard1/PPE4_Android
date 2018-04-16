@@ -1,6 +1,7 @@
 package fr.area42.mygavolt.Interventions;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import fr.area42.mygavolt.Models.Intervention;
@@ -39,7 +41,7 @@ public class ShowActivity extends AppCompatActivity {
         TextView motiveIntervention = findViewById(R.id.interventionMotive);
         TextView dial = findViewById(R.id.dial);
         TextView mobile = findViewById(R.id.dialMobile);
-        TextView address = findViewById(R.id.address);
+        final TextView address = findViewById(R.id.address);
 
         if (extras != null) {
             id = extras.getInt("id");
@@ -65,6 +67,16 @@ public class ShowActivity extends AppCompatActivity {
                 if (extras != null) {
                     intent.putExtra("report", extras.getString("report"));
                 }
+
+                startActivity(intent);
+            }
+        });
+
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q=" + address.getText()));
 
                 startActivity(intent);
             }
