@@ -107,7 +107,9 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionAdapte
         intent.putExtra("motiveIntervention", intervention.motive.label);
         intent.putExtra("customerPhone", intervention.addressCustomer.contact.phone);
         intent.putExtra("customerMobile", intervention.addressCustomer.contact.mobile);
-        intent.putExtra("customerAddress", intervention.addressCustomer.streetNumber + " " +
+
+
+        intent.putExtra("customerAddress", (intervention.addressCustomer.streetNumber != null) ? intervention.addressCustomer.streetNumber : "" + " " +
                 intervention.addressCustomer.streetName + " " + intervention.addressCustomer.zipCode + " " + intervention.addressCustomer.city);
         intent.putExtra("report", intervention.report);
     }
