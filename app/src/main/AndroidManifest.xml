@@ -46,5 +46,6 @@
             android:name=".ReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Customers.FilterActivity" />
     </application>
 </manifest>

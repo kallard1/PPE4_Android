@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.area42.mygavolt.Customers.FilterActivity;
 import fr.area42.mygavolt.Interventions.ListActivity;
 import fr.area42.mygavolt.Singletons.SecurePreferences;
 
@@ -58,7 +59,7 @@ public class SplashScreenActivity extends Activity {
                     if (userID == null) {
                         intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     } else {
-                        intent = new Intent(SplashScreenActivity.this, ListActivity.class);
+                        intent = new Intent(SplashScreenActivity.this, FilterActivity.class);
                         Toast.makeText(getApplicationContext(), "Bonjour " + sharedPreferences.getString("firstname", "") + " " + sharedPreferences.getString("lastname", ""), Toast.LENGTH_SHORT).show();
                     }
                     startActivity(intent);

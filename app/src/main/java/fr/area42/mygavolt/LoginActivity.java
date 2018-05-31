@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import fr.area42.mygavolt.Customers.FilterActivity;
 import fr.area42.mygavolt.Interventions.ListActivity;
 import fr.area42.mygavolt.Models.Employee;
 import fr.area42.mygavolt.Singletons.Http;
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (commit) {
                     Toast.makeText(getApplicationContext(), "Bonjour " + sharedPreferences.getString("firstname", null) + " " + sharedPreferences.getString("lastname", null), Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, FilterActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
